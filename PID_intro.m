@@ -16,6 +16,9 @@ M = 395;%values taken from inital.m file - 20 was predefined                    
 K = 22000;%values taken from inital.m file - 400 was predefined                   % spring stiffness coeficient in N/m - 22000
 C = 1500;%values taken from inital.m file - 200 was predefined                    % damping coefficient in Ns/m    4500
 s = tf('s');                % LaPlace parameter
+
+
+
 t = 0:0.01:2;
 %% plot the step response of the different controllers (P,PD,PI and PID)
 KP = 0;
