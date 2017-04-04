@@ -14,7 +14,7 @@ global Veh
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Choose input parameters
 Vehicle = 'Road'            % set Road or Rail for the vehicle parameters
-mu_select = 1;              % set friction to mu_select = 1 (dry road), 2 (wet 
+mu_select = 3;              % set friction to mu_select = 1 (dry road), 2 (wet 
                             % road) or 3 (snow) for road and 1 for rail
 Task = 2;
 dt = 0.001;
@@ -155,6 +155,13 @@ axis([-1 2 -1.1 1.1])
 xlabel('longitudinal slip \kappa/rad')
 ylabel('longitudinal force f_x/N')
 legend(tire_leg(mu_select),'Location','NorthWest')
+
+
+
+[a,b] = max(mu_plot);
+slip_treshold_tractive = [slip0(b)-0.07,slip0(b)+0.03];
+[a,b] = min(mu_plot);
+slip_treshold_brake = [slip0(b)-0.03,slip0(b)+0.07];
 %% 
 % definition of state-space model for three mass quarter car model
 % z(1)=! xc
