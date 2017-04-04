@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.54"
+    ComputedModelVersion    "1.55"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [67.0, 52.0, 967.0, 1028.0]
+      Location		      [67.0, 52.0, 927.0, 1028.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -49,33 +49,51 @@ Model {
       }
       Array {
 	Type			"Simulink.EditorInfo"
-	Dimension		3
+	Dimension		5
 	Object {
 	  $ObjectID		  5
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "273"
-	  Extents		  [736.0, 883.0]
-	  ZoomFactor		  [1.5]
-	  Offset		  [0.0, 0.0]
+	  LoadSaveID		  "208"
+	  Extents		  [696.0, 883.0]
+	  ZoomFactor		  [0.93428571428571427]
+	  Offset		  [50.015290519877674, -228.36945927451427]
 	}
 	Object {
 	  $ObjectID		  6
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "208"
-	  Extents		  [736.0, 883.0]
-	  ZoomFactor		  [1.3052382941337444]
-	  Offset		  [109.766176730226, -106.92371364097812]
+	  LoadSaveID		  "367"
+	  Extents		  [696.0, 883.0]
+	  ZoomFactor		  [1.074089892721654]
+	  Offset		  [2.96570920658683, -73.545670377994043]
 	}
 	Object {
 	  $ObjectID		  7
 	  IsActive		  [0]
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
+	  Extents		  [696.0, 883.0]
+	  ZoomFactor		  [0.68303159066270969]
+	  Offset		  [506.66463693949947, -259.47007513691432]
+	}
+	Object {
+	  $ObjectID		  8
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "242"
-	  Extents		  [736.0, 883.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [-10.43343567859359, -93.95110853729247]
+	  Extents		  [696.0, 883.0]
+	  ZoomFactor		  [1.25]
+	  Offset		  [844.56568107209569, -101.722115613004]
+	}
+	Object {
+	  $ObjectID		  9
+	  IsActive		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "360"
+	  Extents		  [696.0, 883.0]
+	  ZoomFactor		  [2.3952042131211835]
+	  Offset		  [522.91279940119762, -18.32666308008983]
 	}
 	PropName		"EditorsInfo"
       }
@@ -90,9 +108,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "eric"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Apr 04 12:03:57 2017"
-  RTWModifiedTimeStamp	  413208196
-  ModelVersionFormat	  "1.%<AutoIncrement:54>"
+  LastModifiedDate	  "Tue Apr 04 16:33:25 2017"
+  RTWModifiedTimeStamp	  413224383
+  ModelVersionFormat	  "1.%<AutoIncrement:55>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -133,7 +151,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    8
+    $ObjectID		    10
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "slip_model_Student"
     Array {
@@ -198,13 +216,13 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      9
+      $ObjectID		      11
       Version		      "1.14.3"
       Array {
 	Type			"Handle"
 	Dimension		9
 	Simulink.SolverCC {
-	  $ObjectID		  10
+	  $ObjectID		  12
 	  Version		  "1.14.3"
 	  StartTime		  "0.0"
 	  StopTime		  "20"
@@ -225,8 +243,8 @@ Model {
 	  SolverMode		  "Auto"
 	  EnableConcurrentExecution off
 	  ConcurrentTasks	  off
-	  Solver		  "ode45"
-	  SolverName		  "ode45"
+	  Solver		  "ode23s"
+	  SolverName		  "ode23s"
 	  SolverJacobianMethodControl "auto"
 	  ShapePreserveControl	  "DisableAll"
 	  ZeroCrossControl	  "UseLocalSettings"
@@ -239,7 +257,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  11
+	  $ObjectID		  13
 	  Version		  "1.14.3"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -272,7 +290,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  12
+	  $ObjectID		  14
 	  Version		  "1.14.3"
 	  Array {
 	    Type		    "Cell"
@@ -331,7 +349,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  13
+	  $ObjectID		  15
 	  Version		  "1.14.3"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -422,7 +440,7 @@ Model {
 	  IntegerSaturationMsg	  "warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  14
+	  $ObjectID		  16
 	  Version		  "1.14.3"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -463,7 +481,7 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  15
+	  $ObjectID		  17
 	  Version		  "1.14.3"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -478,7 +496,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  16
+	  $ObjectID		  18
 	  Version		  "1.14.3"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -494,7 +512,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  17
+	  $ObjectID		  19
 	  Version		  "1.14.3"
 	  Array {
 	    Type		    "Cell"
@@ -572,7 +590,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      18
+	      $ObjectID		      20
 	      Version		      "1.14.3"
 	      Array {
 		Type			"Cell"
@@ -639,7 +657,7 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      19
+	      $ObjectID		      21
 	      Version		      "1.14.3"
 	      Array {
 		Type			"Cell"
@@ -726,7 +744,7 @@ Model {
 	  }
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  20
+	  $ObjectID		  22
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -750,17 +768,17 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 400, 210, 1280, 840 ] 
+      ConfigPrmDlgPosition     [ 390, 200, 1490, 888 ] 
     }
     PropName		    "ConfigurationSets"
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    9
+    $ObjectID		    11
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    21
+    $ObjectID		    23
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -1193,8 +1211,8 @@ Model {
   }
   System {
     Name		    "slip_model_Student"
-    Location		    [67, 52, 1034, 1080]
-    Open		    off
+    Location		    [67, 52, 994, 1080]
+    Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1205,9 +1223,9 @@ Model {
     TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "75"
+    ZoomFactor		    "68"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "518"
+    SIDHighWatermark	    "537"
     Block {
       BlockType		      SubSystem
       Name		      "Actuator"
@@ -1219,7 +1237,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"Actuator"
-	Location		[55, 14, 1022, 1110]
+	Location		[67, 52, 1034, 1080]
 	Open			off
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1261,7 +1279,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Friction Brake"
-	    Location		    [392, 154, 1490, 576]
+	    Location		    [67, 52, 1034, 1080]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -1546,7 +1564,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"Controller"
-	Location		[67, 52, 1034, 1080]
+	Location		[67, 52, 994, 1080]
 	Open			off
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1638,8 +1656,8 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Feedforward"
-	    Location		    [67, 52, 1034, 1080]
-	    Open		    off
+	    Location		    [67, 52, 994, 1080]
+	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -1650,7 +1668,7 @@ Model {
 	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "247"
+	    ZoomFactor		    "240"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Throttle"
@@ -1772,8 +1790,8 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "TCS (PID)"
-	    Location		    [67, 52, 1034, 1080]
-	    Open		    off
+	    Location		    [67, 52, 994, 1080]
+	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -1784,83 +1802,155 @@ Model {
 	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "133"
+	    ZoomFactor		    "107"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Slip_tractive"
 	      SID		      "503"
-	      Position		      [85, 383, 115, 397]
+	      Position		      [120, 448, 150, 462]
 	      ZOrder		      2
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Constant
-	      Name		      "Constant"
-	      SID		      "511"
-	      Position		      [270, 335, 300, 365]
-	      ZOrder		      6
-	    }
-	    Block {
-	      BlockType		      Constant
 	      Name		      "Constant1"
 	      SID		      "512"
-	      Position		      [270, 395, 300, 425]
+	      Position		      [305, 410, 335, 440]
 	      ZOrder		      7
 	      Value		      "0"
 	    }
 	    Block {
-	      BlockType		      Saturate
-	      Name		      "Saturation"
-	      SID		      "513"
-	      Ports		      [1, 1]
-	      Position		      [165, 375, 195, 405]
-	      ZOrder		      19
-	      InputPortMap	      "u0"
-	      UpperLimit	      "slip_treshold_tractive(2)"
-	      LowerLimit	      "slip_treshold_tractive(1)"
-	      ZeroCross		      off
+	      BlockType		      Constant
+	      Name		      "Constant2"
+	      SID		      "519"
+	      Position		      [305, 325, 335, 355]
+	      ZOrder		      25
 	    }
 	    Block {
-	      BlockType		      Scope
-	      Name		      "Scope"
-	      SID		      "515"
-	      Ports		      [1]
-	      Position		      [290, 269, 320, 301]
-	      ZOrder		      21
-	      Floating		      off
-	      Location		      [141, 111, 1068, 1079]
-	      Open		      off
-	      NumInputPorts	      "1"
-	      List {
-		ListType		AxesTitles
-		axes1			"%<SignalLabel>"
-	      }
-	      List {
-		ListType		ScopeGraphics
-		FigureColor		"[0.5 0.5 0.5]"
-		AxesColor		"[0 0 0]"
-		AxesTickColor		"[1 1 1]"
-		LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
-		LineStyles		"-|-|-|-|-|-"
-		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
-		MarkerStyles		"none|none|none|none|none|none"
-	      }
-	      ShowLegends	      off
-	      YMin		      "0.32"
-	      YMax		      "0.32"
-	      SaveName		      "ScopeData10"
-	      ScrollMode	      off
+	      BlockType		      Reference
+	      Name		      "PID Controller"
+	      SID		      "525"
+	      Ports		      [1, 1]
+	      Position		      [225, 362, 265, 398]
+	      ZOrder		      28
+	      LibraryVersion	      "1.354"
+	      SourceBlock	      "simulink/Continuous/PID Controller"
+	      SourceType	      "PID 1dof"
+	      ContentPreviewEnabled   off
+	      Controller	      "PID"
+	      TimeDomain	      "Continuous-time"
+	      SampleTime	      "-1"
+	      IntegratorMethod	      "Forward Euler"
+	      FilterMethod	      "Forward Euler"
+	      Form		      "Parallel"
+	      P			      "0.001"
+	      I			      "0.001"
+	      D			      "100"
+	      N			      "0"
+	      InitialConditionSource  "internal"
+	      InitialConditionForIntegrator "0"
+	      InitialConditionForFilter	"0"
+	      ExternalReset	      "none"
+	      IgnoreLimit	      off
+	      ZeroCross		      on
+	      LimitOutput	      off
+	      UpperSaturationLimit    "slip_treshold_tractive(2)"
+	      LowerSaturationLimit    "-inf"
+	      LinearizeAsGain	      on
+	      AntiWindupMode	      "none"
+	      Kb		      "1"
+	      TrackingMode	      off
+	      Kt		      "1"
+	      RndMeth		      "Floor"
+	      SaturateOnIntegerOverflow	off
+	      LockScale		      off
+	      PParamMin		      "[]"
+	      PParamMax		      "[]"
+	      PParamDataTypeStr	      "Inherit: Inherit via internal rule"
+	      IParamMin		      "[]"
+	      IParamMax		      "[]"
+	      IParamDataTypeStr	      "Inherit: Inherit via internal rule"
+	      DParamMin		      "[]"
+	      DParamMax		      "[]"
+	      DParamDataTypeStr	      "Inherit: Inherit via internal rule"
+	      NParamMin		      "[]"
+	      NParamMax		      "[]"
+	      NParamDataTypeStr	      "Inherit: Inherit via internal rule"
+	      KbParamMin	      "[]"
+	      KbParamMax	      "[]"
+	      KbParamDataTypeStr      "Inherit: Inherit via internal rule"
+	      KtParamMin	      "[]"
+	      KtParamMax	      "[]"
+	      KtParamDataTypeStr      "Inherit: Inherit via internal rule"
+	      POutMin		      "[]"
+	      POutMax		      "[]"
+	      POutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      IOutMin		      "[]"
+	      IOutMax		      "[]"
+	      IOutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      DOutMin		      "[]"
+	      DOutMax		      "[]"
+	      DOutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      NOutMin		      "[]"
+	      NOutMax		      "[]"
+	      NOutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      KbOutMin		      "[]"
+	      KbOutMax		      "[]"
+	      KbOutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      KtOutMin		      "[]"
+	      KtOutMax		      "[]"
+	      KtOutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      IntegratorOutMin	      "[]"
+	      IntegratorOutMax	      "[]"
+	      IntegratorOutDataTypeStr "Inherit: Inherit via internal rule"
+	      FilterOutMin	      "[]"
+	      FilterOutMax	      "[]"
+	      FilterOutDataTypeStr    "Inherit: Inherit via internal rule"
+	      SumOutMin		      "[]"
+	      SumOutMax		      "[]"
+	      SumOutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      SumI1OutMin	      "[]"
+	      SumI1OutMax	      "[]"
+	      SumI1OutDataTypeStr     "Inherit: Inherit via internal rule"
+	      SumI2OutMin	      "[]"
+	      SumI2OutMax	      "[]"
+	      SumI2OutDataTypeStr     "Inherit: Inherit via internal rule"
+	      SumI3OutMin	      "[]"
+	      SumI3OutMax	      "[]"
+	      SumI3OutDataTypeStr     "Inherit: Inherit via internal rule"
+	      SumDOutMin	      "[]"
+	      SumDOutMax	      "[]"
+	      SumDOutDataTypeStr      "Inherit: Inherit via internal rule"
+	      SumAccumDataTypeStr     "Inherit: Inherit via internal rule"
+	      SumI1AccumDataTypeStr   "Inherit: Inherit via internal rule"
+	      SumI2AccumDataTypeStr   "Inherit: Inherit via internal rule"
+	      SumI3AccumDataTypeStr   "Inherit: Inherit via internal rule"
+	      SumDAccumDataTypeStr    "Inherit: Inherit via internal rule"
+	      SaturationOutMin	      "[]"
+	      SaturationOutMax	      "[]"
+	      SaturationOutDataTypeStr "Inherit: Same as input"
+	      IntegratorContinuousStateAttributes "''"
+	      IntegratorStateMustResolveToSignalObject off
+	      IntegratorRTWStateStorageClass "Auto"
+	      FilterContinuousStateAttributes "''"
+	      FilterStateMustResolveToSignalObject off
+	      FilterRTWStateStorageClass "Auto"
+	      DifferentiatorICPrevScaledInput "0"
+	      DifferentiatorOutMin    "[]"
+	      DifferentiatorOutMax    "[]"
+	      DifferentiatorOutDataTypeStr "Inherit: Inherit via internal rule"
+	      UseFilter		      on
 	    }
 	    Block {
 	      BlockType		      Scope
 	      Name		      "Scope1"
 	      SID		      "516"
 	      Ports		      [1]
-	      Position		      [570, 304, 600, 336]
+	      Position		      [605, 304, 635, 336]
 	      ZOrder		      22
 	      Floating		      off
-	      Location		      [183, 396, 517, 665]
-	      Open		      off
+	      Location		      [994, 81, 1921, 1079]
+	      Open		      on
 	      NumInputPorts	      "1"
 	      List {
 		ListType		AxesTitles
@@ -1877,16 +1967,49 @@ Model {
 		MarkerStyles		"none|none|none|none|none|none"
 	      }
 	      ShowLegends	      off
+	      YMin		      "0"
+	      YMax		      "1"
 	      SaveName		      "ScopeData11"
+	      ScrollMode	      off
+	    }
+	    Block {
+	      BlockType		      Scope
+	      Name		      "Scope2"
+	      SID		      "528"
+	      Ports		      [1]
+	      Position		      [290, 184, 320, 216]
+	      ZOrder		      31
+	      Floating		      off
+	      Location		      [1401, 344, 1735, 613]
+	      Open		      on
+	      NumInputPorts	      "1"
+	      List {
+		ListType		AxesTitles
+		axes1			"%<SignalLabel>"
+	      }
+	      List {
+		ListType		ScopeGraphics
+		FigureColor		"[0.5 0.5 0.5]"
+		AxesColor		"[0 0 0]"
+		AxesTickColor		"[1 1 1]"
+		LineColors		"[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+		LineStyles		"-|-|-|-|-|-"
+		LineWidths		"[0.5 0.5 0.5 0.5 0.5 0.5]"
+		MarkerStyles		"none|none|none|none|none|none"
+	      }
+	      ShowLegends	      off
+	      YMin		      "-0.0008"
+	      YMax		      "0.0004"
+	      SaveName		      "ScopeData10"
 	      ScrollMode	      off
 	    }
 	    Block {
 	      BlockType		      Sum
 	      Name		      "Sum"
-	      SID		      "514"
+	      SID		      "527"
 	      Ports		      [2, 1]
-	      Position		      [225, 380, 245, 400]
-	      ZOrder		      20
+	      Position		      [185, 370, 205, 390]
+	      ZOrder		      30
 	      ShowName		      off
 	      IconShape		      "round"
 	      Inputs		      "|+-"
@@ -1898,68 +2021,67 @@ Model {
 	      BlockType		      Switch
 	      Name		      "Switch"
 	      SID		      "510"
-	      Position		      [345, 334, 440, 426]
+	      Position		      [380, 334, 475, 426]
 	      ZOrder		      5
 	      ShowName		      off
-	      Criteria		      "u2 ~= 0"
 	      InputSameDT	      off
 	      SaturateOnIntegerOverflow	off
-	      ZeroCross		      off
+	      SampleTime	      "0.01"
 	    }
 	    Block {
 	      BlockType		      ZeroOrderHold
 	      Name		      "Zero-Order\nHold1"
-	      SID		      "517"
-	      Position		      [225, 270, 260, 300]
-	      ZOrder		      23
+	      SID		      "529"
+	      Position		      [215, 185, 250, 215]
+	      ZOrder		      32
 	      SampleTime	      "0.01"
 	    }
 	    Block {
 	      BlockType		      ZeroOrderHold
 	      Name		      "Zero-Order\nHold2"
 	      SID		      "518"
-	      Position		      [495, 305, 530, 335]
+	      Position		      [530, 305, 565, 335]
 	      ZOrder		      24
 	      SampleTime	      "0.01"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "ref"
+	      SID		      "526"
+	      Position		      [30, 365, 60, 395]
+	      ZOrder		      29
+	      Value		      "slip_treshold_tractive(2)-0.03"
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Throttle_control"
 	      SID		      "508"
-	      Position		      [475, 373, 505, 387]
+	      Position		      [510, 373, 540, 387]
 	      ZOrder		      4
 	      IconDisplay	      "Port number"
-	    }
-	    Line {
-	      ZOrder		      1
-	      SrcBlock		      "Slip_tractive"
-	      SrcPort		      1
-	      Points		      [23, 0]
-	      Branch {
-		ZOrder			8
-		Points			[0, 44; 92, 0]
-		DstBlock		"Sum"
-		DstPort			2
-	      }
-	      Branch {
-		ZOrder			7
-		DstBlock		"Saturation"
-		DstPort			1
-	      }
-	    }
-	    Line {
-	      ZOrder		      2
-	      SrcBlock		      "Constant"
-	      SrcPort		      1
-	      DstBlock		      "Switch"
-	      DstPort		      1
 	    }
 	    Line {
 	      ZOrder		      3
 	      SrcBlock		      "Constant1"
 	      SrcPort		      1
+	      Points		      [18, 0; 0, -15]
 	      DstBlock		      "Switch"
 	      DstPort		      3
+	    }
+	    Line {
+	      ZOrder		      15
+	      SrcBlock		      "Zero-Order\nHold2"
+	      SrcPort		      1
+	      DstBlock		      "Scope1"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      22
+	      SrcBlock		      "Constant2"
+	      SrcPort		      1
+	      Points		      [25, 0]
+	      DstBlock		      "Switch"
+	      DstPort		      1
 	    }
 	    Line {
 	      ZOrder		      4
@@ -1979,43 +2101,50 @@ Model {
 	      }
 	    }
 	    Line {
-	      ZOrder		      6
-	      SrcBlock		      "Saturation"
+	      ZOrder		      37
+	      SrcBlock		      "Sum"
+	      SrcPort		      1
+	      DstBlock		      "PID Controller"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      39
+	      SrcBlock		      "Zero-Order\nHold1"
+	      SrcPort		      1
+	      DstBlock		      "Scope2"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      58
+	      SrcBlock		      "ref"
 	      SrcPort		      1
 	      DstBlock		      "Sum"
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      9
-	      SrcBlock		      "Sum"
+	      ZOrder		      65
+	      SrcBlock		      "Slip_tractive"
 	      SrcPort		      1
-	      Points		      [13, 0]
+	      Points		      [40, 0]
+	      DstBlock		      "Sum"
+	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      66
+	      SrcBlock		      "PID Controller"
+	      SrcPort		      1
+	      Points		      [25, 0]
 	      Branch {
-		ZOrder			11
-		Points			[0, -32; -51, 0; 0, -73]
+		ZOrder			68
+		Points			[0, 111; -279, 0; 0, -291]
 		DstBlock		"Zero-Order\nHold1"
 		DstPort			1
 	      }
 	      Branch {
-		ZOrder			10
-		Points			[60, 0; 0, -10]
+		ZOrder			67
 		DstBlock		"Switch"
 		DstPort			2
 	      }
-	    }
-	    Line {
-	      ZOrder		      14
-	      SrcBlock		      "Zero-Order\nHold1"
-	      SrcPort		      1
-	      DstBlock		      "Scope"
-	      DstPort		      1
-	    }
-	    Line {
-	      ZOrder		      15
-	      SrcBlock		      "Zero-Order\nHold2"
-	      SrcPort		      1
-	      DstBlock		      "Scope1"
-	      DstPort		      1
 	    }
 	  }
 	}
@@ -2024,13 +2153,13 @@ Model {
 	  Name			  "slip calculation"
 	  SID			  "208"
 	  Ports			  [1, 2]
-	  Position		  [85, 189, 185, 231]
+	  Position		  [85, 179, 185, 221]
 	  ZOrder		  -7
 	  LibraryVersion	  "1.225"
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "slip calculation"
-	    Location		    [67, 52, 1034, 1080]
+	    Location		    [67, 52, 994, 1080]
 	    Open		    on
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -2042,7 +2171,7 @@ Model {
 	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "131"
+	    ZoomFactor		    "93"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Sensor input"
@@ -2072,19 +2201,6 @@ Model {
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
-	    }
-	    Block {
-	      BlockType		      Product
-	      Name		      "Divide"
-	      SID		      "493"
-	      Ports		      [2, 1]
-	      Position		      [390, 167, 420, 198]
-	      ZOrder		      8
-	      Inputs		      "*/"
-	      InputSameDT	      off
-	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-	      RndMeth		      "Floor"
-	      SaturateOnIntegerOverflow	off
 	    }
 	    Block {
 	      BlockType		      Product
@@ -2140,7 +2256,7 @@ Model {
 	      Position		      [350, 114, 380, 146]
 	      ZOrder		      3
 	      Floating		      off
-	      Location		      [68, 81, 1005, 1079]
+	      Location		      [994, 81, 1921, 1079]
 	      Open		      off
 	      NumInputPorts	      "1"
 	      List {
@@ -2159,7 +2275,7 @@ Model {
 	      }
 	      ShowLegends	      off
 	      YMin		      "0"
-	      YMax		      "80"
+	      YMax		      "150"
 	      SaveName		      "ScopeData8"
 	      ScrollMode	      off
 	    }
@@ -2171,8 +2287,8 @@ Model {
 	      Position		      [630, 214, 660, 246]
 	      ZOrder		      13
 	      Floating		      off
-	      Location		      [989, 111, 1916, 1079]
-	      Open		      off
+	      Location		      [994, 81, 1921, 1079]
+	      Open		      on
 	      NumInputPorts	      "1"
 	      List {
 		ListType		AxesTitles
@@ -2193,6 +2309,145 @@ Model {
 	      YMax		      "1"
 	      SaveName		      "ScopeData9"
 	      ScrollMode	      off
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Subsystem"
+	      SID		      "531"
+	      Ports		      [2, 1]
+	      Position		      [385, 150, 425, 210]
+	      ZOrder		      19
+	      RequestExecContextInheritance off
+	      System {
+		Name			"Subsystem"
+		Location		[67, 52, 1034, 1080]
+		Open			off
+		ModelBrowserVisibility	on
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"131"
+		Block {
+		  BlockType		  Inport
+		  Name			  "In1"
+		  SID			  "532"
+		  Position		  [20, 3, 50, 17]
+		  ZOrder		  9
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "In2"
+		  SID			  "533"
+		  Position		  [20, 38, 50, 52]
+		  ZOrder		  10
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "Divide"
+		  SID			  "493"
+		  Ports			  [2, 1]
+		  Position		  [140, 2, 170, 33]
+		  ZOrder		  8
+		  Inputs		  "*/"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  RndMeth		  "Floor"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Switch
+		  Name			  "Switch"
+		  SID			  "535"
+		  Position		  [205, 25, 255, 65]
+		  ZOrder		  21
+		  Criteria		  "u2 ~= 0"
+		  InputSameDT		  off
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "Out1"
+		  SID			  "534"
+		  Position		  [290, 38, 320, 52]
+		  ZOrder		  11
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  FontName		  "Helvetica"
+		  FontSize		  9
+		  FontWeight		  "normal"
+		  FontAngle		  "normal"
+		  ZOrder		  44
+		  SrcBlock		  "In1"
+		  SrcPort		  1
+		  DstBlock		  "Divide"
+		  DstPort		  1
+		}
+		Line {
+		  FontName		  "Helvetica"
+		  FontSize		  9
+		  FontWeight		  "normal"
+		  FontAngle		  "normal"
+		  ZOrder		  47
+		  SrcBlock		  "In2"
+		  SrcPort		  1
+		  Points		  [38, 0]
+		  Branch {
+		    ZOrder		    49
+		    Points		    [0, -20]
+		    DstBlock		    "Divide"
+		    DstPort		    2
+		  }
+		  Branch {
+		    ZOrder		    48
+		    Points		    [10, 0; 0, 15]
+		    Branch {
+		    ZOrder		    53
+		    Points		    [0, 2; 87, 0]
+		    DstBlock		    "Switch"
+		    DstPort		    3
+		    }
+		    Branch {
+		    ZOrder		    52
+		    Points		    [0, 2; 79, 0; 0, -17]
+		    DstBlock		    "Switch"
+		    DstPort		    2
+		    }
+		  }
+		}
+		Line {
+		  FontName		  "Helvetica"
+		  FontSize		  9
+		  FontWeight		  "normal"
+		  FontAngle		  "normal"
+		  ZOrder		  50
+		  SrcBlock		  "Divide"
+		  SrcPort		  1
+		  Points		  [13, 0; 0, 10]
+		  DstBlock		  "Switch"
+		  DstPort		  1
+		}
+		Line {
+		  FontName		  "Helvetica"
+		  FontSize		  9
+		  FontWeight		  "normal"
+		  FontAngle		  "normal"
+		  ZOrder		  51
+		  SrcBlock		  "Switch"
+		  SrcPort		  1
+		  DstBlock		  "Out1"
+		  DstPort		  1
+		}
+	      }
 	    }
 	    Block {
 	      BlockType		      Sum
@@ -2291,13 +2546,6 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      7
-	      SrcBlock		      "Sum"
-	      SrcPort		      1
-	      DstBlock		      "Divide"
-	      DstPort		      1
-	    }
-	    Line {
 	      Name		      "<omega>"
 	      ZOrder		      8
 	      Labels		      [0, 0]
@@ -2335,21 +2583,25 @@ Model {
 	      }
 	    }
 	    Line {
+	      FontName		      "Helvetica"
+	      FontSize		      9
+	      FontWeight	      "normal"
+	      FontAngle		      "normal"
 	      ZOrder		      12
 	      SrcBlock		      "radius"
 	      SrcPort		      1
 	      Points		      [5, 0]
 	      Branch {
 		ZOrder			36
-		Points			[0, -45]
+		Points			[0, -40]
 		Branch {
-		  ZOrder		  14
+		  ZOrder		  63
 		  DstBlock		  "Sum"
 		  DstPort		  1
 		}
 		Branch {
-		  ZOrder		  11
-		  DstBlock		  "Divide"
+		  ZOrder		  61
+		  DstBlock		  "Subsystem"
 		  DstPort		  2
 		}
 	      }
@@ -2389,13 +2641,6 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      43
-	      SrcBlock		      "Divide"
-	      SrcPort		      1
-	      DstBlock		      "Saturation"
-	      DstPort		      1
-	    }
-	    Line {
 	      ZOrder		      40
 	      SrcBlock		      "Saturation1"
 	      SrcPort		      1
@@ -2428,6 +2673,26 @@ Model {
 		DstBlock		"Slip_tractive"
 		DstPort			1
 	      }
+	    }
+	    Line {
+	      FontName		      "Helvetica"
+	      FontSize		      9
+	      FontWeight	      "normal"
+	      FontAngle		      "normal"
+	      ZOrder		      60
+	      SrcBlock		      "Sum"
+	      SrcPort		      1
+	      Points		      [25, 0; 0, -10]
+	      DstBlock		      "Subsystem"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      62
+	      SrcBlock		      "Subsystem"
+	      SrcPort		      1
+	      Points		      [0, 5]
+	      DstBlock		      "Saturation"
+	      DstPort		      1
 	    }
 	  }
 	}
@@ -2467,6 +2732,7 @@ Model {
 	  ZOrder		  5
 	  SrcBlock		  "Sensor signals"
 	  SrcPort		  1
+	  Points		  [5, 0]
 	  DstBlock		  "slip calculation"
 	  DstPort		  1
 	}
@@ -2474,7 +2740,7 @@ Model {
 	  ZOrder		  6
 	  SrcBlock		  "slip calculation"
 	  SrcPort		  1
-	  Points		  [9, 0; 0, -65]
+	  Points		  [9, 0; 0, -55]
 	  DstBlock		  "TCS (PID)"
 	  DstPort		  1
 	}
@@ -2482,7 +2748,7 @@ Model {
 	  ZOrder		  7
 	  SrcBlock		  "slip calculation"
 	  SrcPort		  2
-	  Points		  [9, 0; 0, 20]
+	  Points		  [9, 0; 0, 30]
 	  DstBlock		  "ABS (PID)"
 	  DstPort		  1
 	}
@@ -2543,7 +2809,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"Driver"
-	Location		[67, 52, 1034, 1080]
+	Location		[67, 52, 994, 1080]
 	Open			on
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -2555,7 +2821,7 @@ Model {
 	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"100"
+	ZoomFactor		"125"
 	Block {
 	  BlockType		  Constant
 	  Name			  "Acceleration input"
@@ -2697,7 +2963,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Enabled\nSubsystem3"
-	    Location		    [168, 45, 1932, 1235]
+	    Location		    [67, 52, 1034, 1080]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -3508,7 +3774,7 @@ Model {
       Position		      [1280, 269, 1310, 301]
       ZOrder		      -7
       Floating		      off
-      Location		      [188, 418, 512, 657]
+      Location		      [183, 449, 517, 718]
       Open		      off
       NumInputPorts	      "1"
       List {
@@ -3544,7 +3810,7 @@ Model {
       System {
 	Name			"Sensors"
 	Location		[67, 52, 1034, 1080]
-	Open			on
+	Open			off
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -3664,7 +3930,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"Vertical dynamics"
-	Location		[168, 45, 1932, 1235]
+	Location		[67, 52, 1034, 1080]
 	Open			off
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -3676,7 +3942,7 @@ Model {
 	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"100"
+	ZoomFactor		"76"
 	Block {
 	  BlockType		  Scope
 	  Name			  "Load on tire"
@@ -3965,7 +4231,7 @@ Model {
 	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"150"
+	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
 	  Name			  "Vx"
@@ -5152,8 +5418,8 @@ Model {
       Position		      [1265, 149, 1295, 181]
       ZOrder		      -11
       Floating		      off
-      Location		      [68, 81, 995, 1079]
-      Open		      off
+      Location		      [994, 81, 1921, 1079]
+      Open		      on
       NumInputPorts	      "1"
       List {
 	ListType		AxesTitles
@@ -5170,8 +5436,8 @@ Model {
 	MarkerStyles		"none|none|none|none|none|none"
       }
       ShowLegends	      off
-      YMin		      "-2.5"
-      YMax		      "32.5"
+      YMin		      "-10"
+      YMax		      "60"
       DataFormat	      "StructureWithTime"
       LimitDataPoints	      off
       SampleTime	      "0"

@@ -129,7 +129,7 @@ T_max = (Veh.mc+Veh.mb+Veh.mw)*9.81*Veh.r;
 %and shorter time to reach max velocity (variable 'Dri.v_lim')
 %Good example could be :
 %mu_select=1 , K_em = 1*T_max in comparisson with K_em = 1.2*T_max
-K_em = 0.4*T_max;
+K_em = T_max;%0.4*T_max;
 K_brake = 0.5*T_max;
 
 %Included by Eric
@@ -158,9 +158,9 @@ legend(tire_leg(mu_select),'Location','NorthWest')
 
 
 
-[a,b] = max(mu_plot);
+[~,b] = max(mu_plot);
 slip_treshold_tractive = [slip0(b)-0.07,slip0(b)+0.03];
-[a,b] = min(mu_plot);
+[~,b] = min(mu_plot);
 slip_treshold_brake = [slip0(b)-0.03,slip0(b)+0.07];
 %% 
 % definition of state-space model for three mass quarter car model
