@@ -14,7 +14,7 @@ global Veh
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Choose input parameters
 Vehicle = 'Road'            % set Road or Rail for the vehicle parameters
-mu_select = 3;              % set friction to mu_select = 1 (dry road), 2 (wet 
+mu_select = 1;              % set friction to mu_select = 1 (dry road), 2 (wet 
                             % road) or 3 (snow) for road and 1 for rail
 Task = 2;
 dt = 0.001;
@@ -134,14 +134,89 @@ K_em = 0.8*T_max;%0.4*T_max;
 K_brake = 0.8*T_max;
 
 %Included by Eric
-%PID controller veraibles - nothing done yet
-Kp_em = 1;
-Ki_em = 10;
-Kd_em = 0;
+% P Controller variables
+% Road vehicle
 
-Kp_brake = 1*20;
-Ki_brake = 10;
-Kd_brake = 0;
+
+
+
+
+controller = 'PID_ROAD'
+
+
+
+% TODO - SET PARAMETERS
+switch(controller)
+    case 'P_ROAD'
+        Kp_em = 1000;
+        Ki_em = 0;
+        Kd_em = 0;
+        alpha_em = 100; % TODO
+
+        Kp_brake = 1000;
+        Ki_brake = 0;
+        Kd_brake = 0;
+        alpha_brake = 100; % TODO
+    
+    case 'PI_ROAD'
+        Kp_em = 1000;
+        Ki_em = 100;
+        Kd_em = 0;
+        alpha_em = 100;
+
+        Kp_brake = 1000;
+        Ki_brake = 100;
+        Kd_brake = 0;
+        alpha_brake = 100;
+        
+    case 'PID_ROAD'
+        Kp_em = 1000;
+        Ki_em = 1000;
+        Kd_em = 10;
+        alpha_em = 100;
+
+        Kp_brake = 1000;
+        Ki_brake = 1000;
+        Kd_brake = 10;
+        alpha_brake = 100;
+    
+    case 'P_RAIL'
+        Kp_em = 1;
+        Ki_em = 0;
+        Kd_em = 0;
+        alpha_em = 100;
+
+        Kp_brake = 1;
+        Ki_brake = 0;
+        Kd_brake = 0;
+        alpha_brake = 100;
+    
+    case 'PI_RAIL'
+        Kp_em = 1;
+        Ki_em = 0;
+        Kd_em = 0;
+
+        Kp_brake = 1;
+        Ki_brake = 0;
+        Kd_brake = 0;
+    
+    case 'PID_RAIL'
+        Kp_em = 1;
+        Ki_em = 0;
+        Kd_em = 0;
+        alpha_em = 100;
+
+        Kp_brake = 1;
+        Ki_brake = 0;
+        Kd_brake = 0;
+        alpha_brake = 100;
+end
+
+
+
+
+%PID controller veraibles - nothing done yet
+
 
 
 
