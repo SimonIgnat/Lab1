@@ -18,6 +18,7 @@ mu_select = 3;              % set friction to mu_select = 1 (dry road), 2 (wet
                             % road) or 3 (snow) for road and 1 for rail
 Task = 2;
 dt = 0.001;
+run_time = 11;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Vehicle parameters
 switch Vehicle
@@ -129,39 +130,43 @@ T_max = (Veh.mc+Veh.mb+Veh.mw)*9.81*Veh.r;
 %and shorter time to reach max velocity (variable 'Dri.v_lim')
 %Good example could be :
 %mu_select=1 , K_em = 1*T_max in comparisson with K_em = 1.2*T_max
-K_em = T_max;%0.4*T_max;
-K_brake = 0.5*T_max;
+K_em = 0.8*T_max;%0.4*T_max;
+K_brake = 0.8*T_max;
 
 %Included by Eric
 %PID controller veraibles - nothing done yet
-Kp_em = 0.4*T_max;
-Kp_brake = 0.5*T_max;
-Ki_em = 1;
-Ki_brake = 1;
-Kd_em = 1;
-Kd_brake = 1;
+Kp_em = 1;
+Ki_em = 10;
+Kd_em = 0;
+
+Kp_brake = 1*20;
+Ki_brake = 10;
+Kd_brake = 0;
 
 
 
 
-%% tire model - force-slip-curves
+%% tire model - force-slipcurves
 slip0 = -1:0.01:2;
 mu_plot = diag(Veh.mu)*sin(atan(slip0'*Veh.Bx)*diag(Veh.Cx))';
 % Fz_max = [mu';-mu'].*(m+mt)*9.81;grid on, 
-hold on
-plot(slip0,mu_plot,'LineWidth',2),grid on, hold on
-axis([-1 2 -1.1 1.1])
+%hold on
+%plot(slip0,mu_plot,'LineWidth',2),grid on, hold on
+%axis([-1 2 -1.1 1.1])
 % plot([a(1) a(end)],[1;1]*Fz_max(1),[a(1) a(end)],[1;1]*Fz_max(2),[a(1) a(end)],[1;1]*Fz_max(3),[a(1) a(end)],[1;1]*Fz_max(4),[a(1) a(end)],[1;1]*Fz_max(5),[a(1) a(end)],[1;1]*Fz_max(6),'LineStyle','--','LineWidth',2,'Color',[0 0 0])
-xlabel('longitudinal slip \kappa/rad')
-ylabel('longitudinal force f_x/N')
-legend(tire_leg(mu_select),'Location','NorthWest')
+%xlabel('longitudinal slip \kappa/rad')
+%ylabel('longitudinal force f_x/N')
+%legend(tire_leg(mu_select),'Location','NorthWest')
 
 
 
 [~,b] = max(mu_plot);
-slip_treshold_tractive = [slip0(b)-0.07,slip0(b)+0.03];
+slip_ref_t = slip0(b)
+%slip_treshold_tractive = [slip0(b)-0.07,slip0(b)+0.03];
 [~,b] = min(mu_plot);
-slip_treshold_brake = [slip0(b)-0.03,slip0(b)+0.07];
+
+slip_ref_b = slip0(b)
+%slip_treshold_brake = [slip0(b)-0.03,slip0(b)+0.07];
 %% 
 % definition of state-space model for three mass quarter car model
 % z(1)=! xc
@@ -189,5 +194,8 @@ DD = [Veh.kw Veh.cw]; % use for dynamic load
 %to automatically run the simulink file - euals pressing the green play
 %button in simulink
 sim('slip_model_Student')
+
+
+
 % 
 % visualise(vx);
