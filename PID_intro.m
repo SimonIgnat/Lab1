@@ -12,9 +12,9 @@ clear all
 
 %% mass, spring and damper values and transfer function
 %Modified by Eric
-M =20;% 395;%values taken from inital.m file - 20 was predefined                    % mass in kg - 395 Kg
-K = 400;%22000;%values taken from inital.m file - 400 was predefined                   % spring stiffness coeficient in N/m - 22000
-C = 200;%1500;%values taken from inital.m file - 200 was predefined                    % damping coefficient in Ns/m    4500
+M = 395;%values taken from inital.m file - 20 was predefined                    % mass in kg - 395 Kg
+K = 22000;%values taken from inital.m file - 400 was predefined                   % spring stiffness coeficient in N/m - 22000
+C = 4500;%values taken from inital.m file - 200 was predefined                    % damping coefficient in Ns/m    4500
 s = tf('s');                % LaPlace parameter
 
 
@@ -22,16 +22,10 @@ s = tf('s');                % LaPlace parameter
 
 t = 0:0.01:2;
 %% plot the step response of the different controllers (P,PD,PI and PID)
-KP = 5000;
+KP = 2e5;
 KI = 0;
 KD = 0;
 
-123
-T =  1/(M*s*s+C*s+K);
-Ctrl = pid(KP,KI,KD);
-S = feedback(Ctrl*T,1);
-figure
-step(S);
 figure(3)
 set(gcf,'Position',[100 100 600 600])
 grid on
@@ -58,7 +52,7 @@ text(0.8,-0.33,'K_{i}=','FontSize',14)
 KI_wert=text(1.0,-0.33,num2str(KI),'FontSize',14);
 
 KD_Slider = uicontrol('Style', 'slider',...
-'Position', [400 75 120 20],'min',0,'max',1000000,...
+'Position', [400 75 120 20],'min',0,'max',20000,...
 'value',KD,'String','Kd');
 text(1.5,-0.33,'K_{d}=','FontSize',14)
 KD_wert=text(1.7,-0.33,num2str(KD),'FontSize',14);
