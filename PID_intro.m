@@ -12,9 +12,9 @@ clear all
 
 %% mass, spring and damper values and transfer function
 %Modified by Eric
-M = 395;%values taken from inital.m file - 20 was predefined                    % mass in kg - 395 Kg
-K = 22000;%values taken from inital.m file - 400 was predefined                   % spring stiffness coeficient in N/m - 22000
-C = 1500;%values taken from inital.m file - 200 was predefined                    % damping coefficient in Ns/m    4500
+M =20;% 395;%values taken from inital.m file - 20 was predefined                    % mass in kg - 395 Kg
+K = 400;%22000;%values taken from inital.m file - 400 was predefined                   % spring stiffness coeficient in N/m - 22000
+C = 200;%1500;%values taken from inital.m file - 200 was predefined                    % damping coefficient in Ns/m    4500
 s = tf('s');                % LaPlace parameter
 
 
@@ -22,9 +22,16 @@ s = tf('s');                % LaPlace parameter
 
 t = 0:0.01:2;
 %% plot the step response of the different controllers (P,PD,PI and PID)
-KP = 0;
+KP = 5000;
 KI = 0;
 KD = 0;
+
+123
+T =  1/(M*s*s+C*s+K);
+Ctrl = pid(KP,KI,KD);
+S = feedback(Ctrl*T,1);
+figure
+step(S);
 figure(3)
 set(gcf,'Position',[100 100 600 600])
 grid on
@@ -98,6 +105,7 @@ set(K_wert,'string',num2str(K))
 set(C_wert,'string',num2str(C))
 drawnow
 end
+
 
 %% Included by Eric
 %Task 1.d
