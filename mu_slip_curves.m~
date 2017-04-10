@@ -17,12 +17,8 @@ Vehicle = 'Road'            % set Road or Rail for the vehicle parameters
 mu_select = 2;              % set friction to mu_select = 1 (dry road), 2 (wet 
                             % road) or 3 (snow) for road and 1 for rail
 Task = 2;
-disturbance = 1;
-dist_acc_time = [2 2.5];
-dist_bra_time = [8.5 9];
-
 dt = 0.001;
-run_time = 20;
+run_time = 25;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Vehicle parameters
 switch Vehicle
@@ -54,25 +50,7 @@ switch Vehicle
         Veh.r = 0.3; % rolling radius for tire in m
         Veh.mu = [1 0.7 0.3]; % friction coefficients [snow, rain and dry]
         tire_leg={'\mu = 1','\mu = 0.7','\mu = 0.3'};
-        Veh.mu_dist = 0.3;        
-        Veh.Cx_dist = 1.1; % Magic Formula tire shape factor
-        Veh.Bx_dist = 18; % Magic Formula stiffness factor
-        Veh.C_fk_dist=Veh.Bx_dist*Veh.Cx_dist*Veh.Dx;
-        switch mu_select
-            case {1}
-                Veh.Bx = Veh.Bx(1); 
-                Veh.Cx = Veh.Cx(1);
-                Veh.mu = Veh.mu(1);
-            case {2}
-                Veh.Bx = Veh.Bx(2); 
-                Veh.Cx = Veh.Cx(2);
-                Veh.mu = Veh.mu(2);                
-            case {3}
-                Veh.Bx = Veh.Bx(3); 
-                Veh.Cx = Veh.Cx(3);
-                Veh.mu = Veh.mu(3);                
-        end
-        Veh.C_fk=Veh.Bx*Veh.Cx*Veh.Dx;
+        Veh.C_fk=Veh.Bx.*Veh.Cx.*Veh.Dx;
 
     case {'Rail'}
         % Initial values for rail vehicle
@@ -104,10 +82,6 @@ switch Vehicle
         Veh.mu = 0.2; % friction coefficients [snow, rain and dry]  
         tire_leg={'\mu = 0.2'};
         mu_select = 1;
-        Veh.mu_dist = Veh.mu;        
-        Veh.Cx_dist = Veh.Cx; % Magic Formula tire shape factor
-        Veh.Bx_dist = Veh.Bx; % Magic Formula stiffness factor
-        Veh.C_fk_dist=Veh.Bx_dist*Veh.Cx_dist*Veh.Dx;
 end
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -142,184 +116,34 @@ T_max = (Veh.mc+Veh.mb+Veh.mw)*9.81*Veh.r;
 %and shorter time to reach max velocity (variable 'Dri.v_lim')
 %Good example could be :
 %mu_select=1 , K_em = 1*T_max in comparisson with K_em = 1.2*T_max
+K_em = 0.8*T_max;%0.4*T_max;
+K_brake = 0.8*T_max;
 
-
-
-
-
-K_em = 0.5*T_max;%0.4*T_max;
-K_brake = 0.5*T_max;
+%1.05, 0.77, 0.4, 0.22 - good values
 
 %Included by Eric
 % P Controller variables
 % Road vehicle
 
 
-controller = 'Optimal'
-
-alpha_brake = 100;
-alpha_em = 100;
-
-switch(controller)
-    case 'P'
-        switch(Vehicle)
-            case 'Road'
-                Kp_em = 1000;
-                Ki_em = 0;
-                Kd_em = 0;
-
-                Kp_brake = 1000;
-                Ki_brake = 0;
-                Kd_brake = 0;
-            case 'Rail'
-                Kp_em = 1;
-                Ki_em = 0;
-                Kd_em = 0;
-
-                Kp_brake = 1;
-                Ki_brake = 0;
-                Kd_brake = 0;
-        end
-    case 'PI'
-        switch(Vehicle)
-            case 'Road'
-                Kp_em = 30;
-                Ki_em = 1;
-                Kd_em = 0;
-
-                Kp_brake = 300;
-                Ki_brake = 2;
-                Kd_brake = 0;
-            case 'Rail'
-                Kp_em = 1; % Seems to be close to optimum
-                Ki_em = 2;
-                Kd_em = 0;
-
-                Kp_brake = 4;
-                Ki_brake = 1;
-                Kd_brake = 0;
-        end
-     case 'PD'
-        switch(Vehicle)
-            case 'Road'
-                Kp_em = 30;
-                Ki_em = 1;
-                Kd_em = 0;
-
-                Kp_brake = 300;
-                Ki_brake = 2;
-                Kd_brake = 0;
-            case 'Rail'
-                Kp_em = 1; % Seems to be close to optimum
-                Ki_em = 2;
-                Kd_em = 0;
-
-                Kp_brake = 4;
-                Ki_brake = 1;
-                Kd_brake = 0;
-        end   
-    case 'PID'
-        switch(Vehicle)
-            case 'Road' % Optimal so far
-                Kp_em = 30; 
-                Ki_em = 4;
-                Kd_em = 2;
-
-                Kp_brake = 300;
-                Ki_brake = 1;
-                Kd_brake = 7;
-            case 'Rail'
-                Kp_em = 1;
-                Ki_em = 2;
-                Kd_em = 0.5;
-
-                Kp_brake = 4; % Seems to be close to optimum
-                Ki_brake = 1;
-                Kd_brake = 10;
-        end
-    case 'Optimal'
-        switch(Vehicle)
-            case 'Road'   
-                Kp_em = 55; 
-                Ki_em = 0;
-                Kd_em = 2;      
- 
-                Kp_brake = 300;
-                Ki_brake = 1;
-                Kd_brake = 7;
-
-            case 'Rail'
-                Kp_em = 30; 
-                Ki_em = 4;
-                Kd_em = 2;      
-
-                Kp_brake = 300;
-                Ki_brake = 1;
-                Kd_brake = 7;
-        end
-        
-        
-    case 'FeedThrough'
-        switch(Vehicle)
-            case 'Road'   
-                Kp_em = 0; 
-                Ki_em = 0;
-                Kd_em = 0;      
- 
-                Kp_brake = 0;
-                Ki_brake = 0;
-                Kd_brake = 0;
-                
-                switch(mu_select)
-                    case 1
-                        K_em = 1.0*1.05*T_max;
-                        K_brake = 1.0*1.03*T_max;
-                        
-                    case 2
-                        K_em = 0.735*1.0*T_max;%0.4*T_max;
-                        K_brake = 0.725*1.0*T_max;
-                    case 3
-                        K_em = 0.322*1.0*T_max;
-                        K_brake = 0.31*1.0*T_max;
-                end
-                
-                
-            case 'Rail'
-                Kp_em = 0; 
-                Ki_em = 0;
-                Kd_em = 0;      
-
-                Kp_brake = 0;
-                Ki_brake = 0;
-                Kd_brake = 0;
-                
-                
-                
-                K_em = 0.22*1.1*T_max;
-                K_brake = 0.23*1.1*T_max;
-        end
-end
-
-
-
 
 
 %% tire model - force-slipcurves
+
 slip0 = -1:0.01:1;
 mu_plot = diag(Veh.mu)*sin(atan(slip0'*Veh.Bx)*diag(Veh.Cx))';
 % Fz_max = [mu';-mu'].*(m+mt)*9.81;grid on, 
-if 0
+if 1
 hold on
-plot(slip0,mu_plot,'LineWidth',2),grid on, hold on
+plot(slip0,mu_plot(1,:),'LineWidth',2),grid on, hold on
+plot(slip0,mu_plot(2,:),'LineWidth',2)
+plot(slip0,mu_plot(3,:),'LineWidth',2)
 axis([-1 1 -1.1 1.1])
 % plot([a(1) a(end)],[1;1]*Fz_max(1),[a(1) a(end)],[1;1]*Fz_max(2),[a(1) a(end)],[1;1]*Fz_max(3),[a(1) a(end)],[1;1]*Fz_max(4),[a(1) a(end)],[1;1]*Fz_max(5),[a(1) a(end)],[1;1]*Fz_max(6),'LineStyle','--','LineWidth',2,'Color',[0 0 0])
 xlabel('longitudinal slip \kappa/rad')
 ylabel('longitudinal force f_x/N')
-legend(tire_leg(mu_select),'Location','NorthWest')
+legend(tire_leg,'Location','NorthWest')
 end
-
-
-
 
 
 
@@ -328,23 +152,16 @@ if Vehicle ==  'Rail'
     slip_ref_t = 0.2
     slip_ref_b = -0.2
 else
-    [~,b] = max(mu_plot);
-    slip_ref_t = slip0(b)
+    [~,bmax] = max(mu_plot(2,:));
+    slip_ref_t = slip0(bmax)
     %slip_treshold_tractive = [slip0(b)-0.07,slip0(b)+0.03];
-    [~,b] = min(mu_plot);
+    [~,bmin] = min(mu_plot(2,:));
 
-    slip_ref_b = slip0(b)
-    
-    
-    if strcmp(controller,'FeedThrough')
-        slip_ref_b = -0.14;
-
-        slip_ref_t = 0.14;
-    end
-    
-    
-    
+    slip_ref_b = slip0(bmin)
 end
+plot([slip_ref_t, slip_ref_t],[mu_plot(1,bmax) mu_plot(3,bmax)],'LineWidth',1,'LineStyle','- -')
+plot([slip_ref_b, slip_ref_b],[mu_plot(1,bmin) mu_plot(3,bmin)],'LineWidth',1,'LineStyle','- -')
+scatter([slip_ref_b, slip_ref_b, slip_ref_b, slip_ref_t, slip_ref_t, slip_ref_t],[mu_plot(1,bmin) mu_plot(2,bmin) mu_plot(3,bmin) mu_plot(1,bmax) mu_plot(2,bmax) mu_plot(3,bmax)],'LineWidth',2,''r')
 %% 
 % definition of state-space model for three mass quarter car model
 % z(1)=! xc
@@ -368,45 +185,4 @@ BB = [0 0; 0 0; 0 0; 0 0; 0 0; Veh.kw/Veh.mw Veh.cw/Veh.mw];
 CC = [0 0 0 0 -Veh.kw -Veh.cw]; % use for dynamic load
 DD = [Veh.kw Veh.cw]; % use for dynamic load
 
-%modified by Eric
-%to automatically run the simulink file - euals pressing the green play
-%button in simulink
-sim('slip_model_Student')
 
-figure(1)
-plot(slip_data.time,slip_data.signals.values(:,1),'r','LineWidth',2);
-hold on;
-plot(slip_data.time,slip_data.signals.values(:,2),'b','LineWidth',2);
-plot([-1 1e4],[slip_ref_t slip_ref_t],'LineStyle','- -','Color','k');
-grid on;
-title('Slip for acceleration and brake phase');
-ylabel('Longitudinal Slip')
-xlabel('Time in seconds')
-ylim([0 1.1]);
-legend('Slip tractive','Slip brake');
-
-
-%Set a good xlim !!!
-xlim([0 run_time]);
-
-
-figure(2)
-plot(feedtrough_vx.time,feedtrough_vx.signals.values(:,1),'r','LineWidth',2);
-hold on;
-plot(feedtrough_vx.time,feedtrough_vx.signals.values(:,2),'b','LineWidth',2);
-grid on;
-title('Acceleration and braking with feed-through');
-ylabel('Longitudinal velocity')
-xlabel('Time in seconds')
-%ylim([0 1.1]);
-legend('V_x','\omega');
-
-
-%Set a good xlim !!!
-xlim([0 run_time]);
-
-
-[~,b_acc_time] = min(Out_Throttle);
-acc_time = acc_data.time(b_acc_time)
-[~,b_break_time] = min(Out_Brakepedal);
-bra_dist = max(Out_sx) - Out_sx(b_break_time)
