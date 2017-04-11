@@ -14,7 +14,7 @@ global Veh
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Choose input parameters
 Vehicle = 'Road'            % set Road or Rail for the vehicle parameters
-mu_select = 1;              % set friction to mu_select = 1 (dry road), 2 (wet 
+mu_select = 2;              % set friction to mu_select = 1 (dry road), 2 (wet 
                             % road) or 3 (snow) for road and 1 for rail
 Task = 2;
 disturbance = 0;
@@ -22,7 +22,6 @@ dist_acc_time = [2 2.5];
 dist_bra_time = [8.5 9];
 
 dt = 0.001;
-run_time = 35;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Vehicle parameters
 switch Vehicle
@@ -63,14 +62,20 @@ switch Vehicle
                 Veh.Bx = Veh.Bx(1); 
                 Veh.Cx = Veh.Cx(1);
                 Veh.mu = Veh.mu(1);
+                run_time = 9;
+                picture_name = 'pictures/road_dry_';
             case {2}
                 Veh.Bx = Veh.Bx(2); 
                 Veh.Cx = Veh.Cx(2);
-                Veh.mu = Veh.mu(2);                
+                Veh.mu = Veh.mu(2);
+                run_time = 12; 
+                picture_name = 'pictures/road_wet_';               
             case {3}
                 Veh.Bx = Veh.Bx(3); 
                 Veh.Cx = Veh.Cx(3);
-                Veh.mu = Veh.mu(3);                
+                Veh.mu = Veh.mu(3); 
+                run_time = 25;  
+                picture_name = 'pictures/road_snowy_';             
         end
         Veh.C_fk=Veh.Bx*Veh.Cx*Veh.Dx;
 
@@ -108,6 +113,8 @@ switch Vehicle
         Veh.Cx_dist = Veh.Cx; % Magic Formula tire shape factor
         Veh.Bx_dist = Veh.Bx; % Magic Formula stiffness factor
         Veh.C_fk_dist=Veh.Bx_dist*Veh.Cx_dist*Veh.Dx;
+        run_time = 30;
+        picture_name = 'pictures/rail_';
 end
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -155,7 +162,7 @@ K_brake = 0.725*T_max;
 % Road vehicle
 
 
-controller = 'FeedThrough'
+controller = 'Optimal'
 
 alpha_brake = 100;
 alpha_em = 100;
@@ -240,13 +247,13 @@ switch(controller)
     case 'Optimal'
         switch(Vehicle)
             case 'Road'   
-                Kp_em = 55; 
-                Ki_em = 0;
-                Kd_em = 2;      
- 
-                Kp_brake = 300;
-                Ki_brake = 1;
-                Kd_brake = 7;
+                Kp_em = 50; 
+                Ki_em = 2;
+                Kd_em = 2;
+
+                Kp_brake = 100;
+                Ki_brake = 0;
+                Kd_brake = 2;
 
             case 'Rail'
                 Kp_em = 30; 
@@ -330,9 +337,9 @@ slip_ref_t = slip0(b);
 
 slip_ref_b = slip0(b);
 if ~strcmp(controller,'FeedThrough')
-    slip_ref_b = -0.4;
+    slip_ref_b = -0.14;
     
-    slip_ref_t = 0.4;
+    slip_ref_t = 0.14;
 end
 
 %% 
@@ -362,33 +369,49 @@ DD = [Veh.kw Veh.cw]; % use for dynamic load
 %to automatically run the simulink file - euals pressing the green play
 %button in simulink
 sim('slip_model_Student')
+if 0
+    figure(1)
+    plot(slip_data.time,slip_data.signals.values(:,1),'r','LineWidth',2);
+    hold on;
+    plot(slip_data.time,slip_data.signals.values(:,2),'b','LineWidth',2);
+    plot([-1 1e4],[slip_ref_t slip_ref_t],'LineStyle','- -','Color','k');
+    grid on;
+    title('Slip for acceleration and brake phase');
+    ylabel('Longitudinal Slip')
+    xlabel('Time in seconds')
+    ylim([0 1.1]);
+    legend('Slip tractive','Slip brake');
+    %Set a good xlim !!!
+    xlim([0 run_time]);
+end 
 
-figure(1)
-plot(slip_data.time,slip_data.signals.values(:,1),'r','LineWidth',2);
-hold on;
-plot(slip_data.time,slip_data.signals.values(:,2),'b','LineWidth',2);
-plot([-1 1e4],[slip_ref_t slip_ref_t],'LineStyle','- -','Color','k');
-grid on;
-title('Slip for acceleration and brake phase');
-ylabel('Longitudinal Slip')
-xlabel('Time in seconds')
-ylim([0 1.1]);
-legend('Slip tractive','Slip brake');
-
-
-%Set a good xlim !!!
-xlim([0 run_time]);
 if 0
     figure(2)
     plot(feedtrough_vx.time,feedtrough_vx.signals.values(:,1),'r','LineWidth',2);
     hold on;
     plot(feedtrough_vx.time,feedtrough_vx.signals.values(:,2),'b','LineWidth',2);
     grid on;
+    
     title('Acceleration and braking with feed-through');
     ylabel('Longitudinal velocity')
     xlabel('Time in seconds')
     %ylim([0 1.1]);
     legend('V_x','\omega');
+    %Set a good xlim !!!
+    xlim([0 run_time]);
+end;
+
+if 1
+    figure(3)
+    plot(utilized_fri.time,utilized_fri.signals.values(:),'r','LineWidth',2);
+    grid on;
+    hold on;
+    plot([0 run_time],[ max(mu_plot)  max(mu_plot)],'LineStyle','- -','Color','k');
+    plot([0 run_time],[ min(mu_plot)  min(mu_plot)],'LineStyle','- -','Color','k');
+    title('Utilized friciton of the vehicle');
+    ylabel('Utilized friciton in percent');
+    xlabel('Time in seconds')
+    ylim([-1.1 1.1]);
     %Set a good xlim !!!
     xlim([0 run_time]);
 end;
