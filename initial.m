@@ -17,9 +17,7 @@ Vehicle = 'Road'            % set Road or Rail for the vehicle parameters
 mu_select = 2;              % set friction to mu_select = 1 (dry road), 2 (wet 
                             % road) or 3 (snow) for road and 1 for rail
 Task = 2;
-disturbance = 0;
-dist_acc_time = [2 2.5];
-dist_bra_time = [8.5 9];
+disturbance = 0;            %switches (1 on, 0 off) the disturbance as icy spot on wet road 
 
 dt = 0.001;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,6 +51,7 @@ switch Vehicle
         Veh.r = 0.3; % rolling radius for tire in m
         Veh.mu = [1 0.7 0.3]; % friction coefficients [snow, rain and dry]
         tire_leg={'\mu = 1','\mu = 0.7','\mu = 0.3'};
+        %for disturbance
         Veh.mu_dist = 0.3;        
         Veh.Cx_dist = 1.1; % Magic Formula tire shape factor
         Veh.Bx_dist = 18; % Magic Formula stiffness factor
@@ -63,18 +62,24 @@ switch Vehicle
                 Veh.Cx = Veh.Cx(1);
                 Veh.mu = Veh.mu(1);
                 run_time = 9;
+                dist_acc_time = [2 2.5];
+                dist_bra_time = [7.5 8];
                 picture_name = 'pictures/road_dry_';
             case {2}
                 Veh.Bx = Veh.Bx(2); 
                 Veh.Cx = Veh.Cx(2);
                 Veh.mu = Veh.mu(2);
-                run_time = 12; 
+                run_time = 12;
+                dist_acc_time = [1.5 2.5];
+                dist_bra_time = [8.5 9.5]; 
                 picture_name = 'pictures/road_wet_';               
             case {3}
                 Veh.Bx = Veh.Bx(3); 
                 Veh.Cx = Veh.Cx(3);
                 Veh.mu = Veh.mu(3); 
-                run_time = 25;  
+                run_time = 25; 
+                dist_acc_time = [2 2.5];
+                dist_bra_time = [12 12.5];  
                 picture_name = 'pictures/road_snowy_';             
         end
         Veh.C_fk=Veh.Bx*Veh.Cx*Veh.Dx;
@@ -114,19 +119,13 @@ switch Vehicle
         Veh.Bx_dist = Veh.Bx; % Magic Formula stiffness factor
         Veh.C_fk_dist=Veh.Bx_dist*Veh.Cx_dist*Veh.Dx;
         run_time = 30;
+        dist_acc_time = [2 2.5];
+        dist_bra_time = [12 12.5];
         picture_name = 'pictures/rail_';
 end
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Driver parameters
-
-%Included by Eric
-%The value to which the program will accelerate is not 90 km/h. TO change
-%it just change the value in slip_model_Student/Driver/Switch/Threshold
-%(default Dri.v_lim/3.6). Attention there are two different Switches
-%(Switch and Switch1)
-%For Task 2.b probably use Dri.v_lim as threshold as I understand
-
 Dri.v_lim = 90; %in km/h
 Dri.t_const = 3; %in seconds
 Dri.Ka = 1;  % throttle gain (0-100%) of driver
@@ -136,30 +135,8 @@ Dri.Kb = -1; % braking gain (0-100%) of driver
 % Control parameters
 T_max = (Veh.mc+Veh.mb+Veh.mw)*9.81*Veh.r;
 
-%Included by Eric
-%the next two variables (K_em, K_brake) convert signal (1 for acc, 0 for nothing, -1 for
-%breaking) into the applied torque to the wheels. I included them into
-%slip_model_Student/Controller/FeedForward
-%for different cases (variable 'Vehicle') and for different frictions
-%(variable 'mu_select') the wheel can have high slip. To see this just open
-%the Scope 'vx' in the main view (slip_model_student)
-
-%Changing the values for K_em and K_brake (default 0.4 and 0.5) will lead
-%to higher applied torque on the wheels and can cause higher acceleration
-%and shorter time to reach max velocity (variable 'Dri.v_lim')
-%Good example could be :
-%mu_select=1 , K_em = 1*T_max in comparisson with K_em = 1.2*T_max
-
-
-
-
-
 K_em = 0.735*T_max;%0.4*T_max;
 K_brake = 0.725*T_max;
-
-%Included by Eric
-% P Controller variables
-% Road vehicle
 
 
 controller = 'Optimal'
@@ -267,20 +244,20 @@ switch(controller)
         
         
     case 'FeedThrough'
+        Kp_em = 0;
+        Ki_em = 0;
+        Kd_em = 0;
+        
+        Kp_brake = 0;
+        Ki_brake = 0;
+        Kd_brake = 0;
         switch(Vehicle)
             case 'Road'   
-                Kp_em = 0; 
-                Ki_em = 0;
-                Kd_em = 0;      
- 
-                Kp_brake = 0;
-                Ki_brake = 0;
-                Kd_brake = 0;
                 
                 switch(mu_select)
                     case 1
-                        K_em = 1.1*1.05*T_max;
-                        K_brake = 1.1*1.03*T_max;
+                        K_em = 1.0*1.05*T_max;
+                        K_brake = 1.0*1.03*T_max;
                         
                     case 2
                         K_em = 0.735*1.0*T_max;%0.4*T_max;
@@ -290,18 +267,7 @@ switch(controller)
                         K_brake = 0.31*1.0*T_max;
                 end
                 
-                
             case 'Rail'
-                Kp_em = 0; 
-                Ki_em = 0;
-                Kd_em = 0;      
-
-                Kp_brake = 0;
-                Ki_brake = 0;
-                Kd_brake = 0;
-                
-                
-                
                 K_em = 0.22*1.0*T_max;
                 K_brake = 0.23*1.0*T_max;
         end
@@ -316,20 +282,14 @@ slip0 = -1:0.01:1;
 mu_plot = diag(Veh.mu)*sin(atan(slip0'*Veh.Bx)*diag(Veh.Cx))';
 % Fz_max = [mu';-mu'].*(m+mt)*9.81;grid on, 
 if 0
-hold on
-plot(slip0,mu_plot,'LineWidth',2),grid on, hold on
-axis([-1 1 -1.1 1.1])
-% plot([a(1) a(end)],[1;1]*Fz_max(1),[a(1) a(end)],[1;1]*Fz_max(2),[a(1) a(end)],[1;1]*Fz_max(3),[a(1) a(end)],[1;1]*Fz_max(4),[a(1) a(end)],[1;1]*Fz_max(5),[a(1) a(end)],[1;1]*Fz_max(6),'LineStyle','--','LineWidth',2,'Color',[0 0 0])
-xlabel('longitudinal slip \kappa/rad')
-ylabel('longitudinal force f_x/N')
-legend(tire_leg(mu_select),'Location','NorthWest')
+    hold on
+    plot(slip0,mu_plot,'LineWidth',2),grid on, hold on
+    axis([-1 1 -1.1 1.1])
+    % plot([a(1) a(end)],[1;1]*Fz_max(1),[a(1) a(end)],[1;1]*Fz_max(2),[a(1) a(end)],[1;1]*Fz_max(3),[a(1) a(end)],[1;1]*Fz_max(4),[a(1) a(end)],[1;1]*Fz_max(5),[a(1) a(end)],[1;1]*Fz_max(6),'LineStyle','--','LineWidth',2,'Color',[0 0 0])
+    xlabel('longitudinal slip \kappa/rad')
+    ylabel('longitudinal force f_x/N')
+    legend(tire_leg(mu_select),'Location','NorthWest')
 end
-
-
-
-
-
-
 
 [~,b] = max(mu_plot);
 slip_ref_t = slip0(b);
@@ -369,6 +329,7 @@ DD = [Veh.kw Veh.cw]; % use for dynamic load
 %to automatically run the simulink file - euals pressing the green play
 %button in simulink
 sim('slip_model_Student')
+%plotting slip over time
 if 0
     figure(1)
     plot(slip_data.time,slip_data.signals.values(:,1),'r','LineWidth',2);
@@ -385,6 +346,7 @@ if 0
     xlim([0 run_time]);
 end 
 
+%plotting velocity of wheel and vehicle over time
 if 0
     figure(2)
     plot(feedtrough_vx.time,feedtrough_vx.signals.values(:,1),'r','LineWidth',2);
@@ -401,7 +363,8 @@ if 0
     xlim([0 run_time]);
 end;
 
-if 1
+%plotes utilzed friciton (still some bugs)
+if 0
     figure(3)
     plot(utilized_fri.time,utilized_fri.signals.values(:),'r','LineWidth',2);
     grid on;
@@ -415,7 +378,7 @@ if 1
     %Set a good xlim !!!
     xlim([0 run_time]);
 end;
-
+%acc time and breaking distance
 [~,b_acc_time] = min(Out_Throttle);
 acc_time = feedtrough_vx.time(b_acc_time)
 [~,b_break_time] = min(Out_Brakepedal);
